@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  yahoo_finance_data_reader: ^1.0.2
 
 dev_dependencies:
   flutter_test:
