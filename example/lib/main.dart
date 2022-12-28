@@ -6,7 +6,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -86,72 +88,17 @@ class _BuyAndHoldResultState extends State<BuyAndHoldResult> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          children: [
-                            const Expanded(child: Text('CAGR')),
-                            Expanded(
-                                child: Text(backTest.cagr.toStringAsFixed(2))),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Expanded(child: Text('Max Drawdown')),
-                            Expanded(
-                                child: Text(
-                                    backTest.maxDrawdown.toStringAsFixed(2))),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Expanded(child: Text('MAR')),
-                            Expanded(
-                                child: Text(backTest.mar.toStringAsFixed(2))),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Expanded(child: Text('Trading years')),
-                            Expanded(
-                                child: Text(
-                                    backTest.tradingYears.toStringAsFixed(2))),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Expanded(child: Text('Start date')),
-                            Expanded(
-                                child: Text(backTest.startDate.toString())),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Expanded(child: Text('End date')),
-                            Expanded(child: Text(backTest.endDate.toString())),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Expanded(child: Text('Current drawdown')),
-                            Expanded(
-                                child: Text(backTest.currentDrawdown
-                                    .toStringAsFixed(2))),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Expanded(child: Text('End price')),
-                            Expanded(
-                                child:
-                                    Text(backTest.endPrice.toStringAsFixed(2))),
-                          ],
-                        ),
+                        _BackTestResult(backTest),
+                        MaterialButton(
+                          onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  _IndicatorsData(controller.text),
+                            ),
+                          ),
+                          color: Colors.teal,
+                          child: Text('Indicators'),
+                        )
                       ],
                     ),
         ),
@@ -173,5 +120,164 @@ class _BuyAndHoldResultState extends State<BuyAndHoldResult> {
       error = 'Error getting the symbol ${controller.text}:\n $e';
       setState(() {});
     }
+  }
+}
+
+class _BackTestResult extends StatelessWidget {
+  final BuyAndHoldStrategyResult backTest;
+  const _BackTestResult(this.backTest);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            const Expanded(child: Text('CAGR')),
+            Expanded(child: Text(backTest.cagr.toStringAsFixed(2))),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Expanded(child: Text('Max Drawdown')),
+            Expanded(child: Text(backTest.maxDrawdown.toStringAsFixed(2))),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Expanded(child: Text('MAR')),
+            Expanded(child: Text(backTest.mar.toStringAsFixed(2))),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Expanded(child: Text('Trading years')),
+            Expanded(child: Text(backTest.tradingYears.toStringAsFixed(2))),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Expanded(child: Text('Start date')),
+            Expanded(child: Text(backTest.startDate.toString())),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Expanded(child: Text('End date')),
+            Expanded(child: Text(backTest.endDate.toString())),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Expanded(child: Text('Current drawdown')),
+            Expanded(child: Text(backTest.currentDrawdown.toStringAsFixed(2))),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Expanded(child: Text('End price')),
+            Expanded(child: Text(backTest.endPrice.toStringAsFixed(2))),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _IndicatorsData extends StatefulWidget {
+  final String symbol;
+  const _IndicatorsData(
+    this.symbol,
+  );
+
+  @override
+  State<_IndicatorsData> createState() => _IndicatorsDataState();
+}
+
+class _IndicatorsDataState extends State<_IndicatorsData> {
+  final TextEditingController indicatorsController = TextEditingController(
+    text: 'SMA_20,EMA_20,RSI_20',
+  );
+
+  List<YahooFinanceCandleData> prices = [];
+
+  void load() async {
+    prices = await StockMarketDataService().getCandlesWithIndicators(
+      widget.symbol,
+      indicatorsController.text.split(','),
+    );
+
+    // Reverse to show in a list
+    prices = prices.reversed.toList();
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Indicators'),
+      ),
+      body: ListView.builder(
+        itemCount: prices.length + 1,
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return Container(
+              margin: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  const Text('Indicators'),
+                  TextField(
+                    controller: indicatorsController,
+                  ),
+                  MaterialButton(
+                    onPressed: load,
+                    color: Theme.of(context).primaryColor,
+                    child: const Text('Load'),
+                  ),
+                ],
+              ),
+            );
+          }
+          final i = index - 1;
+          return _PriceWithIndicators(prices[i]);
+        },
+      ),
+    );
+  }
+}
+
+class _PriceWithIndicators extends StatelessWidget {
+  final YahooFinanceCandleData candle;
+
+  const _PriceWithIndicators(
+    this.candle,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Container(
+        margin: EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Text('Date: ${candle.date}'),
+            Text('Close: ${candle.close}'),
+            Column(
+                children: candle.indicators.keys
+                    .map((key) => Text(
+                        '$key: ${candle.indicators[key]?.toStringAsFixed(2)}'))
+                    .toList())
+          ],
+        ),
+      ),
+    );
   }
 }

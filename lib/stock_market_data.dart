@@ -12,3 +12,4 @@ export 'package:stock_market_data/src/stock_market_data_service.dart';
 export 'package:stock_market_data/src/utils/buy_and_hold_strategy.dart';
 export 'package:stock_market_data/src/utils/calculate_indicators.dart';
 export 'package:stock_market_data/src/utils/yearly_calculations.dart';
+export 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
