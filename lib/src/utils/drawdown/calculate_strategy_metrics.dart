@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
-@deprecated
 class CalculateStrategyMetrics {
   static double calculateCAGR(List<YahooFinanceCandleData> candles) {
     final double tradingDays =

@@ -1,9 +1,15 @@
-/// Represent an investment instrument
-class StockTicker {
-  String symbol;
-  String? description;
+import 'package:flutter/cupertino.dart';
 
-  StockTicker(this.symbol, this.description);
+/// Represent an investment instrument
+@immutable
+class StockTicker {
+  final String symbol;
+  final String? description;
+
+  const StockTicker({
+    required this.symbol,
+    this.description,
+  });
 
   @override
   bool operator ==(Object other) =>
@@ -11,4 +17,12 @@ class StockTicker {
 
   @override
   String toString() => 'symbol: $symbol > description: $description';
+
+  @override
+  int get hashCode => symbol.hashCode;
+
+  StockTicker copyWith({String? symbol, String? description}) => StockTicker(
+        symbol: symbol ?? this.symbol,
+        description: description ?? this.description,
+      );
 }

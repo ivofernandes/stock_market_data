@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
-        child: BuyAndHoldResult(),
+        child: const BuyAndHoldResult(),
       ),
     );
   }
@@ -97,7 +97,7 @@ class _BuyAndHoldResultState extends State<BuyAndHoldResult> {
                             ),
                           ),
                           color: Colors.teal,
-                          child: Text('Indicators'),
+                          child: const Text('Indicators'),
                         )
                       ],
                     ),
@@ -265,7 +265,7 @@ class _PriceWithIndicators extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: Column(
           children: [
             Text('Date: ${candle.date}'),

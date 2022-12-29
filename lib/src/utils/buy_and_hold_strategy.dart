@@ -35,7 +35,7 @@ class BuyAndHoldStrategy {
   static void addIndicators(
       List<YahooFinanceCandleData> prices, BuyAndHoldStrategyResult strategy) {
     final List<int> periods = [20, 50, 200];
-    for (var period in periods) {
+    for (final period in periods) {
       final double movingAverage = SMA.atEnd(prices, period);
       strategy.movingAverages[period] = movingAverage;
     }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:stock_market_data/src/indicators/ema.dart';
 import 'package:stock_market_data/src/indicators/rsi.dart';
 import 'package:stock_market_data/src/indicators/sma.dart';
@@ -43,7 +44,7 @@ class CalculateIndicators {
 
         return {indicatorParts[0]: period};
       } catch (e) {
-        print('$indicator is not an indicator!');
+        debugPrint('$indicator is not an indicator!');
       }
     }
 

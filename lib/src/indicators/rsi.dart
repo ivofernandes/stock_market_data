@@ -9,7 +9,7 @@ class RSI {
 
     // Calculate the difference between the current day's close price and the previous day's close price
     // for each day in the data
-    List<double> diffs = [];
+    final List<double> diffs = [];
     for (int i = 1; i < prices.length; i++) {
       diffs.add(prices[i].adjClose - prices[i - 1].adjClose);
     }
@@ -45,7 +45,7 @@ class RSI {
       final index = i + 1;
       if (index >= period) {
         // Calculate the RSI for each period using the formula: RSI = 100 - (100 / (1 + RS))
-        double rsi = 100 - (100 / (1 + rs));
+        final double rsi = 100 - (100 / (1 + rs));
         prices[index].indicators['RSI_$period'] = rsi;
       }
     }

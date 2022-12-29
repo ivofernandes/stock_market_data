@@ -32,7 +32,7 @@ class EMA {
           'The prices list is just ${prices.length} and not enough to calculate a EMA_$period');
     }
 
-    double alpha = 2 / (period + 1);
+    final double alpha = 2 / (period + 1);
     double ema = 0;
 
     // Initialize the EMA with the average of the first 'period' prices

@@ -7,7 +7,13 @@ Calculate buy and hold CAGR, Drawdown and MAR based on just a symbol
 Add indicators to YahooFinanceCandleData indicators map, indicators supported: SMA, EMA, RSI
 
 This package works as a base for the functionality logic of turing deal.
+https://github.com/ivofernandes/turingDealApp
 
+Android:
+https://play.google.com/store/apps/details?id=com.turing_deal
+
+iOS:
+https://apps.apple.com/us/app/turingdeal-investing-portfolio/id1590934022
 
 ## Getting started
 Add the dependency to your `pubspec.yaml`:
