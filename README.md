@@ -6,6 +6,7 @@ The objective of this package is to implement all the complicated math and calcu
 Calculate buy and hold CAGR, Drawdown and MAR based on just a symbol
 Add indicators to YahooFinanceCandleData indicators map, indicators supported: SMA, EMA, RSI
 
+This package works as a base for the functionality logic of turing deal.
 
 
 ## Getting started
