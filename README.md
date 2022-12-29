@@ -26,6 +26,11 @@ stock_market_data: ^0.0.1
 BuyAndHoldStrategyResult backTest = await StockMarketDataService().getBackTestResultForSymbol('GOOG');
 ```
 
+## Usage for getting candles with indicators
+```dart
+List<YahooFinanceCandleData> prices = await StockMarketDataService().getCandlesWithIndicators('GOOG', ['EMA_20', 'RSI_20']);
+```
+
 
 ## Depends on:
 yahoo_finance_data_reader to get data from yahoo finance
