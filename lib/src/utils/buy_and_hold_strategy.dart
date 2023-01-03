@@ -21,18 +21,18 @@ class BuyAndHoldStrategy {
           prices.last.close; // Sell on close of the last day
       strategy.endPrice = sellPrice;
 
-      calculateStrategyMetrics(prices, buyPrice, sellPrice, strategy);
+      _calculateStrategyMetrics(prices, buyPrice, sellPrice, strategy);
     }
     strategy.progress = 100;
 
-    addIndicators(prices, strategy);
+    _addIndicators(prices, strategy);
 
     strategy.logs['buyAndHoldEnded'] = DateTime.now();
     return strategy;
   }
 
   /// Add current price indicators to a strategy_result: SMA
-  static void addIndicators(
+  static void _addIndicators(
       List<YahooFinanceCandleData> prices, BuyAndHoldStrategyResult strategy) {
     final List<int> periods = [20, 50, 200];
     for (final period in periods) {
@@ -42,7 +42,7 @@ class BuyAndHoldStrategy {
   }
 
   /// Calculate CAGR drawdown and MAR of an strategy_result
-  static void calculateStrategyMetrics(List<YahooFinanceCandleData> prices,
+  static void _calculateStrategyMetrics(List<YahooFinanceCandleData> prices,
       double buyPrice, double sellPrice, BuyAndHoldStrategyResult strategy) {
     // https://www.investopedia.com/terms/c/cagr.asp
     strategy.cagr =

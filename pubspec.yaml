@@ -1,6 +1,6 @@
 name: stock_market_data
 description: Package to get base indicators from the stock and base stats like buy and hold CAGR and total drawdown
-version: 0.0.1
+version: 0.0.2
 homepage: https://incaview.com
 repository: https://github.com/ivofernandes/stock_market_data
 
@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  yahoo_finance_data_reader: ^1.0.3
+  yahoo_finance_data_reader: ^1.0.5
 
 dev_dependencies:
   flutter_test:

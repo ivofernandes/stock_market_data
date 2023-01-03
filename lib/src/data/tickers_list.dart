@@ -1,5 +1,6 @@
 /// Kind of stable static tickers list
 class TickersList {
+  /// List of main indexes
   static Map<String, String> main = {
     '^GSPC': 'SP500',
     '^NDX': 'Nasdaq 100',
@@ -7,6 +8,7 @@ class TickersList {
     'IWB': 'Russell 1000'
   };
 
+  /// Main bonds
   static Map<String, String> bonds = {
     '^IRX': 'USA 13 Week Bond yield',
     '^FVX': 'Treasury Yield 5 Years ',
@@ -14,6 +16,7 @@ class TickersList {
     '^TYX': 'Treasury Yield 30 Years'
   };
 
+  /// ETFs for specific sectors
   static Map<String, String> sectors = {
     'XLE': 'Energy',
     'XLF': 'Financials',
@@ -28,6 +31,7 @@ class TickersList {
     'FCOM': 'Content'
   };
 
+  /// ETFs for specific countries
   static Map<String, String> countries = {
     'URTH': 'Whole World',
     'RSX': 'Russia',
@@ -73,6 +77,7 @@ class TickersList {
     'ZB=F': 'Treasury Bond Futures'
   };
 
+  /// ETFs that group companies based on size of the market capitalization
   static Map<String, String> sizes = {
     'VBR': 'Value small',
     'VOE': 'Value mid',
@@ -85,6 +90,7 @@ class TickersList {
     'VUG': 'Growth large'
   };
 
+  /// Main crypto currencies listed in yahoo finance
   static Map<String, String> cryptoCurrencies = {
     'BTC-USD': 'Bitcoin USD',
     'ETH-USD': 'Ethereum USD',
@@ -189,6 +195,7 @@ class TickersList {
   };
 
   //TODO fill with data from https://datahub.io/core/s-and-p-500-companies
+  /// Some companies to make searching easier
   static Map<String, String> companies = {
     'MMM': '3M',
     'AOS': 'A. O. Smith',

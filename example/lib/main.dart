@@ -36,14 +36,37 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
-        child: const BuyAndHoldResult(),
+        child: SingleChildScrollView(
+          child: Column(
+            children: const [
+              SizedBox(
+                height: 355,
+                width: double.infinity,
+                child: BuyAndHoldResult(
+                  exampleTicker: 'AAPL',
+                ),
+              ),
+              SizedBox(
+                height: 355,
+                width: double.infinity,
+                child: BuyAndHoldResult(
+                  exampleTicker: 'ES=F, GC=F',
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
 
 class BuyAndHoldResult extends StatefulWidget {
-  const BuyAndHoldResult({super.key});
+  final String exampleTicker;
+  const BuyAndHoldResult({
+    required this.exampleTicker,
+    super.key,
+  });
 
   @override
   State<BuyAndHoldResult> createState() => _BuyAndHoldResultState();
@@ -51,7 +74,7 @@ class BuyAndHoldResult extends StatefulWidget {
 
 class _BuyAndHoldResultState extends State<BuyAndHoldResult> {
   final TextEditingController controller = TextEditingController(
-    text: 'GOOG',
+    text: '',
   );
   BuyAndHoldStrategyResult backTest = BuyAndHoldStrategyResult();
   bool loading = true;
@@ -60,6 +83,7 @@ class _BuyAndHoldResultState extends State<BuyAndHoldResult> {
   @override
   void initState() {
     super.initState();
+    controller.text = widget.exampleTicker;
     load();
   }
 

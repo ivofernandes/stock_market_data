@@ -10,11 +10,11 @@ class Variations {
       List<YahooFinanceCandleData> data,
       int delta) {
     final Map<String, List<double?>> intervals =
-        getIntervals(lowerLimit, upperLimit, step);
-    return countVariationsInIntervals(intervals, data, delta);
+        _getIntervals(lowerLimit, upperLimit, step);
+    return _countVariationsInIntervals(intervals, data, delta);
   }
 
-  static Map<String, List<double?>> getIntervals(
+  static Map<String, List<double?>> _getIntervals(
       double lowerLimit, double upperLimit, double interval) {
     final Map<String, List<double?>> intervals = {
       '<$lowerLimit%': [null, lowerLimit]
@@ -36,7 +36,7 @@ class Variations {
     return intervals;
   }
 
-  static List<VariationCount> countVariationsInIntervals(
+  static List<VariationCount> _countVariationsInIntervals(
       Map<String, List<double?>> intervals,
       List<YahooFinanceCandleData> data,
       int delta) {
@@ -46,7 +46,7 @@ class Variations {
       final List<double?> interval = intervals[intervalDescription]!;
 
       final int count =
-          Variations.countVariations(interval[0], interval[1], data, delta);
+          Variations._countVariations(interval[0], interval[1], data, delta);
 
       result.add(VariationCount(intervalDescription, count));
     }
@@ -65,7 +65,7 @@ class Variations {
     }
   }
 
-  static int countVariations(double? lowerLimit, double? upperLimit,
+  static int _countVariations(double? lowerLimit, double? upperLimit,
       List<YahooFinanceCandleData> data, int delta) {
     final int count = data
         .where((YahooFinanceCandleData candle) =>

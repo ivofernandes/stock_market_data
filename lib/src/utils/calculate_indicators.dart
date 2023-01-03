@@ -5,12 +5,12 @@ import 'package:stock_market_data/src/indicators/sma.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class CalculateIndicators {
-  ///
+  /// Add indicators values in a list of candle prices
   static void calculateIndicators(
       List<YahooFinanceCandleData> prices, List<String> indicators) {
     // Calculate the indicators one by one
     for (final indicator in indicators) {
-      final Map<String, int> indicatorValidated = validateIndicator(indicator);
+      final Map<String, int> indicatorValidated = _validateIndicator(indicator);
       if (indicatorValidated.isNotEmpty) {
         final String indicatorType = indicatorValidated.keys.first;
         final int indicatorPeriod = indicatorValidated[indicatorType]!;
@@ -35,7 +35,7 @@ class CalculateIndicators {
     }
   }
 
-  static Map<String, int> validateIndicator(String indicator) {
+  static Map<String, int> _validateIndicator(String indicator) {
     final List<String> indicatorParts = indicator.split('_');
 
     if (indicatorParts.length == 2) {
