@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:stock_market_data/src/model/variation/variation_count.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
@@ -9,13 +11,15 @@ class Variations {
       double step,
       List<YahooFinanceCandleData> data,
       int delta) {
+    final int precision = _getPrecision(lowerLimit, upperLimit, step);
+
     final Map<String, List<double?>> intervals =
-        _getIntervals(lowerLimit, upperLimit, step);
+        _getIntervals(lowerLimit, upperLimit, step, precision);
     return _countVariationsInIntervals(intervals, data, delta);
   }
 
   static Map<String, List<double?>> _getIntervals(
-      double lowerLimit, double upperLimit, double interval) {
+      double lowerLimit, double upperLimit, double interval, int precision) {
     final Map<String, List<double?>> intervals = {
       '<$lowerLimit%': [null, lowerLimit]
     };
@@ -26,7 +30,7 @@ class Variations {
       final double upperValue = lowerValue + interval;
 
       intervals[
-          '${lowerValue.toStringAsFixed(0)}% .. ${upperValue.toStringAsFixed(0)}%'] = [
+          '${lowerValue.toStringAsFixed(precision)}% .. ${upperValue.toStringAsFixed(precision)}%'] = [
         lowerValue,
         upperValue
       ];
@@ -93,5 +97,28 @@ class Variations {
     final List<double> v = vars.cast();
 
     return v;
+  }
+
+  /// Get the needed precision to create intervals
+  static int _getPrecision(double lowerLimit, double upperLimit, double step) {
+    int lowerPrecision = 0;
+    final lowerParts = upperLimit.toString().split('.');
+    if (lowerParts.length == 2) {
+      lowerPrecision = lowerParts[1].length;
+    }
+
+    int stepPrecision = 0;
+    final stepParts = step.toString().split('.');
+    if (stepParts.length == 2) {
+      stepPrecision = stepParts[1].length;
+    }
+
+    int upperPrecision = 0;
+    final upperParts = upperLimit.toString().split('.');
+    if (upperParts.length == 2) {
+      upperPrecision = upperParts[1].length;
+    }
+
+    return max(lowerPrecision, max(stepPrecision, upperPrecision));
   }
 }

@@ -5,6 +5,7 @@ import 'package:stock_market_data/src/utils/drawdown/strategy_drawdown.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class YearlyCalculations {
+  /// Calculate yearly statistics based on a list of daily candles
   static List<YearlyStats> calculate(List<YahooFinanceCandleData> data) {
     final List<YearlyStats> result = [];
 
@@ -16,19 +17,20 @@ class YearlyCalculations {
         if (candle.date.year == currentYear) {
           candlesOfTheYear.add(candle);
         } else {
-          addToResult(result, currentYear, candlesOfTheYear);
+          _addToResult(result, currentYear, candlesOfTheYear);
 
           currentYear = candle.date.year;
           candlesOfTheYear = [];
         }
       }
 
-      addToResult(result, currentYear, candlesOfTheYear);
+      _addToResult(result, currentYear, candlesOfTheYear);
     }
     return result;
   }
 
-  static void addToResult(List<YearlyStats> result, int currentYear,
+  /// Add year, cagr and drawdown to the yearly stats
+  static void _addToResult(List<YearlyStats> result, int currentYear,
       List<YahooFinanceCandleData> candlesOfTheYear) {
     // To have variation needs two days at least
     if (candlesOfTheYear.length > 1) {
@@ -40,7 +42,12 @@ class YearlyCalculations {
           CalculateStrategyMetrics.calculateCAGR(candlesOfTheYear);
 
       result.add(
-          YearlyStats(year: currentYear, variation: cagr, drawdown: drawdown));
+        YearlyStats(
+          year: currentYear,
+          variation: cagr,
+          drawdown: drawdown,
+        ),
+      );
     }
   }
 }

@@ -2,6 +2,7 @@ import 'package:stock_market_data/src/data/tickers_list.dart';
 import 'package:stock_market_data/src/model/stock_ticker.dart';
 
 class TickerResolve {
+  /// Get a description for a ticker
   static String getTickerDescription(StockTicker ticker) {
     if (ticker.description != null) {
       return ticker.description!;
@@ -21,7 +22,7 @@ class TickerResolve {
       } else if (TickersList.countries[symbol] != null) {
         return TickersList.countries[symbol]!;
       }
-      //TODO get from TickersList
+
       return symbol;
     }
   }
