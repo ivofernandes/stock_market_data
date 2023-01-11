@@ -46,7 +46,7 @@ class STDDEV {
     }
 
     // Calculate the STDDEV for the first calculable group of prices
-    stddev = sqrt(sum / (period - 1));
+    stddev = sqrt(sum / period);
     prices[period - 1].indicators['STDDEV_$period'] = stddev;
 
     // Roll over the rest of the dataframe
@@ -61,7 +61,7 @@ class STDDEV {
       sum += (prices[i].adjClose - mean) * (prices[i].adjClose - mean);
 
       // Calculate the STDDEV
-      stddev = sqrt(sum / (period - 1));
+      stddev = sqrt(sum / period);
       prices[i].indicators['STDDEV_$period'] = stddev;
     }
   }

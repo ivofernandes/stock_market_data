@@ -3,6 +3,7 @@ import 'package:stock_market_data/src/indicators/ema.dart';
 import 'package:stock_market_data/src/indicators/rsi.dart';
 import 'package:stock_market_data/src/indicators/sma.dart';
 import 'package:stock_market_data/src/indicators/stddev.dart';
+import 'package:stock_market_data/src/indicators/vwma.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 class CalculateIndicators {
@@ -35,6 +36,9 @@ class CalculateIndicators {
         break;
       case 'STDDEV':
         STDDEV.calculateSTDDEV(prices, period);
+        break;
+      case 'VWMA':
+        VWMA.calculateVWMA(prices, period);
         break;
     }
   }
