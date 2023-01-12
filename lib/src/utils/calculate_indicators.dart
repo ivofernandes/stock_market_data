@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stock_market_data/src/indicators/bollinger_bands.dart';
 import 'package:stock_market_data/src/indicators/ema.dart';
 import 'package:stock_market_data/src/indicators/rsi.dart';
 import 'package:stock_market_data/src/indicators/sma.dart';
@@ -39,6 +40,9 @@ class CalculateIndicators {
         break;
       case 'VWMA':
         VWMA.calculateVWMA(prices, period);
+        break;
+      case 'BB':
+        BollingerBands.calculateBollingerBands(prices, period);
         break;
     }
   }

@@ -18,7 +18,7 @@ class STDDEV {
     mean /= period;
 
     for (int i = prices.length - 1; i > 0 && i >= prices.length - period; i--) {
-      sum += (prices[i].adjClose - mean) * (prices[i].adjClose - mean);
+      sum += pow(prices[i].adjClose - mean, 2);
     }
 
     return sqrt(sum / (period - 1));
@@ -30,39 +30,31 @@ class STDDEV {
           'The prices list is just ${prices.length} and not enough to calculate a STDDEV_$period');
     }
 
-    double mean = 0;
     double sum = 0;
-    double stddev = 0;
+    double mean = 0;
+    double varianceSum = 0;
 
-    // Calculate the first mean
-    for (int j = period - 1; j >= 0; j--) {
-      mean += prices[j].adjClose;
+    for (int j = 0; j < period; j++) {
+      sum += prices[j].adjClose;
     }
-    mean /= period;
-
-    // Calculate the first sum
-    for (int j = period - 1; j >= 0; j--) {
-      sum += (prices[j].adjClose - mean) * (prices[j].adjClose - mean);
+    mean = sum / period;
+    for (int j = 0; j < period; j++) {
+      varianceSum += pow(prices[j].adjClose - mean, 2);
     }
 
-    // Calculate the STDDEV for the first calculable group of prices
-    stddev = sqrt(sum / period);
-    prices[period - 1].indicators['STDDEV_$period'] = stddev;
+    prices[period - 1].indicators['STDDEV_$period'] =
+        sqrt(varianceSum / period);
 
-    // Roll over the rest of the dataframe
     for (int i = period; i < prices.length; i++) {
-      double oldMean = mean;
-      mean = oldMean + (prices[i].adjClose - oldMean) / period;
+      sum -= prices[i - period].adjClose;
+      sum += prices[i].adjClose;
 
-      // subtract the element that with come out of the period
-      sum -= (prices[i - period].adjClose - oldMean) *
-          (prices[i - period].adjClose - oldMean);
-      // Add the new element
-      sum += (prices[i].adjClose - mean) * (prices[i].adjClose - mean);
-
-      // Calculate the STDDEV
-      stddev = sqrt(sum / period);
-      prices[i].indicators['STDDEV_$period'] = stddev;
+      mean = sum / period;
+      varianceSum = 0;
+      for (int j = i - period; j <= i; j++) {
+        varianceSum += pow(prices[j].adjClose - mean, 2);
+      }
+      prices[i].indicators['STDDEV_$period'] = sqrt(varianceSum / period);
     }
   }
 }
