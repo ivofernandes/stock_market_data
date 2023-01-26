@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stock_market_data/src/indicators/balance_of_power.dart';
 import 'package:stock_market_data/src/indicators/bollinger_bands.dart';
 import 'package:stock_market_data/src/indicators/ema.dart';
 import 'package:stock_market_data/src/indicators/mfi.dart';
@@ -51,6 +52,9 @@ class CalculateIndicators {
         break;
       case 'MFI':
         MFI.calculateMFI(prices, period);
+        break;
+      case 'BOP':
+        BalanceOfPower.calculateBOP(prices, period);
         break;
     }
   }
