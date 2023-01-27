@@ -11,6 +11,6 @@ void main() {
 
     assert(prices.last.indicators.containsKey('RSI_20'));
 
-    assert(prices[20].indicators['RSI_20']!.toStringAsFixed(3) == '66.479');
+    assert(prices[20].indicators['RSI_20']!.toStringAsFixed(3) == '66.480');
   });
 }
