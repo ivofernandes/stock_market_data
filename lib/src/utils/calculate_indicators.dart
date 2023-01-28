@@ -3,6 +3,7 @@ import 'package:stock_market_data/src/indicators/balance_of_power.dart';
 import 'package:stock_market_data/src/indicators/bollinger_bands.dart';
 import 'package:stock_market_data/src/indicators/ema.dart';
 import 'package:stock_market_data/src/indicators/mfi.dart';
+import 'package:stock_market_data/src/indicators/p.dart';
 import 'package:stock_market_data/src/indicators/rsi.dart';
 import 'package:stock_market_data/src/indicators/sma.dart';
 import 'package:stock_market_data/src/indicators/stddev.dart';
@@ -55,6 +56,9 @@ class CalculateIndicators {
         break;
       case 'BOP':
         BalanceOfPower.calculateBOP(prices, period);
+        break;
+      case 'P':
+        P.calculatePVT(prices, period);
         break;
     }
   }
