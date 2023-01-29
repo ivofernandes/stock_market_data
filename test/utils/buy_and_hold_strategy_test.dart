@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:stock_market_data/stock_market_data.dart';
-import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
 void main() {
   test('Test buy and hold strategy_result', () async {
@@ -37,7 +36,5 @@ void main() {
     assert(strategy.maxDrawdown == -50);
     assert(strategy.mar == 2);
     assert(strategy.tradingYears == 1);
-
-    print(strategy.toString());
   });
 }

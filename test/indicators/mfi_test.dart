@@ -32,7 +32,7 @@ void main() {
 }
 
 List<YahooFinanceCandleData> getPrices() {
-  DateTime date = DateTime(2004, 8, 19);
+  final DateTime date = DateTime(2004, 8, 19);
   final prices = <YahooFinanceCandleData>[
     YahooFinanceCandleData(
       date: date,

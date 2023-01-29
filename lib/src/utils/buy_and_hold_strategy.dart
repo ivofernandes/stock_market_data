@@ -12,7 +12,7 @@ class BuyAndHoldStrategy {
   static BuyAndHoldStrategyResult buyAndHoldAnalysis(
       List<YahooFinanceCandleData> prices) {
     final BuyAndHoldStrategyResult strategy =
-        BaseStrategyResult.createBuyAndHoldStrategyResult(prices);
+        BaseStrategyResult.createBuyAndHoldStrategyResult(prices) as BuyAndHoldStrategyResult;
 
     if (prices.isNotEmpty) {
       final double buyPrice =

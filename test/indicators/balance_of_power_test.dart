@@ -2,11 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:stock_market_data/src/indicators/balance_of_power.dart';
 import 'package:stock_market_data/stock_market_data.dart';
 
-import 'test_data.dart';
-
 void main() {
   test('Test Balance of power indicator with checked values', () {
-    DateTime date = DateTime(2004, 8, 19);
+    final DateTime date = DateTime(2004, 8, 19);
     final prices = <YahooFinanceCandleData>[
       YahooFinanceCandleData(
         date: date,
@@ -44,4 +42,3 @@ void main() {
     assert(prices[3].indicators['BOP_3'] == 15.799999999999999);
   });
 }
-

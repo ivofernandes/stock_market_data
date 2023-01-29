@@ -193,7 +193,6 @@ linter:
 
     always_specify_types: false
     avoid_annotating_with_dynamic: false
-    avoid_as: false
     avoid_catches_without_on_clauses: false
     avoid_classes_with_only_static_members: false
     avoid_function_literals_in_foreach_calls: false
@@ -206,7 +205,6 @@ linter:
     do_not_use_environment: false
     exhaustive_cases: false
     flutter_style_todos: false
-    invariant_booleans: false
     lines_longer_than_80_chars: false
     missing_whitespace_between_adjacent_strings: false
     one_member_abstracts: false

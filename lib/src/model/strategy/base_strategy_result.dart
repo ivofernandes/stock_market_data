@@ -24,7 +24,9 @@ class BaseStrategyResult {
   @override
   String toString() => 'CAGR: $cagr , drawdown: $maxDrawdown, MAR: $mar';
 
-  static BuyAndHoldStrategyResult createBuyAndHoldStrategyResult(
+  BaseStrategyResult();
+
+  factory BaseStrategyResult.createBuyAndHoldStrategyResult(
       List<YahooFinanceCandleData> prices) {
     final BuyAndHoldStrategyResult strategy = BuyAndHoldStrategyResult();
     addBaseDataToStrategy(strategy, prices);

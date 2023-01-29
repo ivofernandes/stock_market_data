@@ -2,6 +2,9 @@
 Package to get base indicators from the stock and base stats like buy and hold CAGR and total drawdown.
 The objective of this package is to implement all the complicated math and calculation needed to start working with
 
+![Stock market data example screenshot](https://raw.githubusercontent.com/ivofernandes/stock_market_data/master/doc/simulator_screenshot_2.png?raw=true)
+
+
 ## Features
 Calculate buy and hold CAGR, Drawdown and MAR based on just a symbol
 Add indicators to YahooFinanceCandleData indicators map, indicators supported: SMA, EMA, RSI
@@ -29,6 +32,23 @@ BuyAndHoldStrategyResult backTest = await StockMarketDataService().getBackTestRe
 ## Usage for getting candles with indicators
 ```dart
 List<YahooFinanceCandleData> prices = await StockMarketDataService().getCandlesWithIndicators('GOOG', ['EMA_20', 'RSI_20']);
+```
+
+## All supported indicators
+- SMA
+- EMA
+- RSI
+- BB
+- BOP
+- MFI
+- P
+- STDDEV
+- VWMA
+- %R
+
+## Usage for getting candles with all indicators
+```dart
+List<YahooFinanceCandleData> prices = await StockMarketDataService().getCandlesWithIndicators('GOOG', ['SMA_20,EMA_20,RSI_20,STDDEV_20,VWMA_20,BB_20,%R_20,MFI_14,BOP_14,P_1']);
 ```
 
 
