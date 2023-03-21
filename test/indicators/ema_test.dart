@@ -17,4 +17,14 @@ void main() {
     assert(prices.last.indicators.containsKey('EMA_20'));
     assert(prices.last.indicators['EMA_20']!.toStringAsFixed(3) == '2.651');
   });
+
+  test('Test EMA indicator with checked values', () {
+    final List<YahooFinanceCandleData> prices = getTestData();
+    final List<double> values = prices.map((e) => e.adjClose).toList();
+
+    final List<double?> ema =
+        CalculateIndicators.calculateIndicatorsOnValues(values, 'EMA_20');
+
+    assert(ema.last!.toStringAsFixed(3) == '2.651');
+  });
 }

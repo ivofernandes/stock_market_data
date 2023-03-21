@@ -1,4 +1,3 @@
-
 import 'package:stock_market_data/stock_market_data.dart';
 
 /// Calculate pivot points
@@ -6,10 +5,10 @@ class P {
   static void calculatePVT(List<YahooFinanceCandleData> prices, int period) {
     // Skip the first one as we need the previous day data
     for (int i = 1; i < prices.length; i++) {
-
       // Caclulate the pivot point
-      final previousPrice = prices[i-period];
-      final double pivotPoint = (previousPrice.close + previousPrice.close + previousPrice.open) / 3;
+      final previousPrice = prices[i - period];
+      final double pivotPoint =
+          (previousPrice.close + previousPrice.close + previousPrice.open) / 3;
       prices[i].indicators['P_$period'] = pivotPoint;
 
       // Calculate the S1 and S2
@@ -31,8 +30,6 @@ class P {
       // Calculate the R3
       final double r3 = pivotPoint - s2 + r2;
       prices[i].indicators['R3_$period'] = r3;
-
     }
   }
-
 }

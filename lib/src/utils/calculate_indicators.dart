@@ -11,10 +11,14 @@ import 'package:stock_market_data/src/indicators/vwma.dart';
 import 'package:stock_market_data/src/indicators/williams_r.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
+/// Class to calculate the technical indicators
 class CalculateIndicators {
   /// Add indicators values in a list of candle prices
-  static void calculateIndicators(
+  /// Return true if all the indicators were found and calculated
+  static bool calculateIndicators(
       List<YahooFinanceCandleData> prices, List<String> indicators) {
+    bool allFound = true;
+
     // Calculate the indicators one by one
     for (final indicator in indicators) {
       final Map<String, int> indicatorValidated = _validateIndicator(indicator);
@@ -22,47 +26,85 @@ class CalculateIndicators {
         final String indicatorType = indicatorValidated.keys.first;
         final int indicatorPeriod = indicatorValidated[indicatorType]!;
 
-        _calculateIndicator(prices, indicatorType, indicatorPeriod);
+        allFound = allFound &&
+            _calculateIndicator(prices, indicatorType, indicatorPeriod);
       }
     }
+    return allFound;
   }
 
-  static void _calculateIndicator(
+  /// Calculate the indicator values on a list of prices
+  /// Return true if the indicator was found and calculated
+  static bool _calculateIndicator(
       List<YahooFinanceCandleData> prices, String indicator, int period) {
     switch (indicator) {
       case 'SMA':
         SMA.calculateSMA(prices, period);
-        break;
+        return true;
       case 'EMA':
         EMA.calculateEMA(prices, period);
-        break;
+        return true;
       case 'RSI':
         RSI.calculateRSI(prices, period);
-        break;
+        return true;
       case 'STDDEV':
         STDDEV.calculateSTDDEV(prices, period);
-        break;
+        return true;
       case 'VWMA':
         VWMA.calculateVWMA(prices, period);
-        break;
+        return true;
       case 'BB':
         BollingerBands.calculateBollingerBands(prices, period);
-        break;
+        return true;
       case '%R':
         WilliamsR.calculateWilliamsR(prices, period);
-        break;
+        return true;
       case 'MFI':
         MFI.calculateMFI(prices, period);
-        break;
+        return true;
       case 'BOP':
         BalanceOfPower.calculateBOP(prices, period);
-        break;
+        return true;
       case 'P':
         P.calculatePVT(prices, period);
-        break;
+        return true;
+      default:
+        return false;
     }
   }
 
+  /// Calculate the indicators values on a list of values
+  static List<double?> calculateIndicatorsOnValues(
+      List<double> values, String indicator) {
+    final List<double?> calculated = [];
+
+    final Map<String, int> indicatorValidated = _validateIndicator(indicator);
+
+    if (indicatorValidated.isNotEmpty) {
+      final String indicatorType = indicatorValidated.keys.first;
+      final int indicatorPeriod = indicatorValidated[indicatorType]!;
+
+      // Create a list of prices with the
+      final prices = values
+          .map(
+            (e) => YahooFinanceCandleData(
+              adjClose: e,
+              date: DateTime(2004),
+            ),
+          )
+          .toList();
+
+      _calculateIndicator(prices, indicatorType, indicatorPeriod);
+
+      calculated.addAll(prices.map((e) => e.indicators.containsKey(indicator)
+          ? e.indicators[indicator]!
+          : null));
+    }
+
+    return calculated;
+  }
+
+  /// Validate the indicator string
   static Map<String, int> _validateIndicator(String indicator) {
     final List<String> indicatorParts = indicator.split('_');
 

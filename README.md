@@ -2,7 +2,8 @@
 Package to get base indicators from the stock and base stats like buy and hold CAGR and total drawdown.
 The objective of this package is to implement all the complicated math and calculation needed to start working with
 
-![Stock market data example screenshot](https://raw.githubusercontent.com/ivofernandes/stock_market_data/master/doc/simulator_screenshot_2.png?raw=true)
+![Stock market data example screenshot](https://raw.githubusercontent.com/ivofernandes/stock_market_data/master/doc/simulator_screenshot.png?raw=true)
+![Stock market data example screenshot with indicators](https://raw.githubusercontent.com/ivofernandes/stock_market_data/master/doc/simulator_screenshot_2.png?raw=true)
 
 
 ## Features

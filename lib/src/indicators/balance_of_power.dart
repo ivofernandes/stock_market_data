@@ -26,12 +26,12 @@ class BalanceOfPower {
 
   static double calculateSingleBop(YahooFinanceCandleData price) {
     var closeMinusOpen = price.close - price.open;
-    if(closeMinusOpen == 0){
+    if (closeMinusOpen == 0) {
       closeMinusOpen = double.minPositive;
     }
 
     var highMinusLow = price.high - price.low;
-    if(highMinusLow == 0){
+    if (highMinusLow == 0) {
       highMinusLow = double.minPositive;
     }
 

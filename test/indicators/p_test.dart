@@ -5,7 +5,6 @@ import 'mfi_test.dart';
 
 void main() {
   group('P', () {
-
     test('calculateP() should add all pivot points', () {
       final prices = getPrices();
 
@@ -28,6 +27,5 @@ void main() {
       expect(prices[1].indicators['R2_1'], 9.333333333333332);
       expect(prices[1].indicators['R3_1'], 14.333333333333332);
     });
-
   });
 }

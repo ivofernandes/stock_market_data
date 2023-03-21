@@ -227,7 +227,8 @@ class _IndicatorsData extends StatefulWidget {
 
 class _IndicatorsDataState extends State<_IndicatorsData> {
   final TextEditingController indicatorsController = TextEditingController(
-    text: 'SMA_20,EMA_20,RSI_20,STDDEV_20,VWMA_20,BB_20,%R_20,MFI_14,BOP_14,P_1',
+    text:
+        'SMA_20,EMA_20,RSI_20,STDDEV_20,VWMA_20,BB_20,%R_20,MFI_14,BOP_14,P_1',
   );
 
   List<YahooFinanceCandleData> prices = [];
