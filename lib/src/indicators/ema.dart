@@ -8,17 +8,13 @@ class EMA {
     }
 
     final double alpha = 2 / (period + 1);
-    double ema = 0;
+    double ema;
 
-    // Initialize the EMA with the average of the first 'period' prices
-    double sum = 0;
-    for (int i = 0; i < period; i++) {
-      sum += prices[i].adjClose;
-    }
-    ema = sum / period;
+    // Initialize the EMA with the first price
+    ema = prices[0].adjClose;
 
     // Calculate the EMA for the rest of the prices
-    for (int i = period; i < prices.length; i++) {
+    for (int i = 1; i < prices.length; i++) {
       final double currentPrice = prices[i].adjClose;
       ema = alpha * (currentPrice - ema) + ema;
     }
@@ -33,17 +29,13 @@ class EMA {
     }
 
     final double alpha = 2 / (period + 1);
-    double ema = 0;
+    double ema;
 
-    // Initialize the EMA with the average of the first 'period' prices
-    double sum = 0;
-    for (int i = 0; i < period; i++) {
-      sum += prices[i].adjClose;
-    }
-    ema = sum / period;
+    // Initialize the EMA with the first price
+    ema = prices[0].adjClose;
 
     // Calculate the EMA for the rest of the prices
-    for (int i = period; i < prices.length; i++) {
+    for (int i = 1; i < prices.length; i++) {
       final double currentPrice = prices[i].adjClose;
       ema = alpha * (currentPrice - ema) + ema;
       prices[i].indicators['EMA_$period'] = ema;

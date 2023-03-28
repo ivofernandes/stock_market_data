@@ -10,12 +10,12 @@ void main() {
 
     final double ema20 = EMA.atEnd(prices, 20);
 
-    assert(ema20.toStringAsFixed(3) == '2.651');
+    assert(ema20.toStringAsFixed(3) == '2.658');
 
     CalculateIndicators.calculateIndicators(prices, ['EMA_20']);
 
     assert(prices.last.indicators.containsKey('EMA_20'));
-    assert(prices.last.indicators['EMA_20']!.toStringAsFixed(3) == '2.651');
+    assert(prices.last.indicators['EMA_20']!.toStringAsFixed(3) == '2.658');
   });
 
   test('Test EMA indicator with checked values', () {
@@ -25,6 +25,16 @@ void main() {
     final List<double?> ema =
         CalculateIndicators.calculateIndicatorsOnValues(values, 'EMA_20');
 
-    assert(ema.last!.toStringAsFixed(3) == '2.651');
+    assert(ema.last!.toStringAsFixed(3) == '2.658');
+  });
+
+  test('Test of EMA against python data rolling data', () {
+    final List<double> values = [100, 105, 110, 115, 120];
+    final List<double?> ema =
+        CalculateIndicators.calculateIndicatorsOnValues(values, 'EMA_3');
+
+    assert(ema[2] == 106.25);
+    assert(ema[3] == 110.625);
+    assert(ema[4] == 115.3125);
   });
 }
