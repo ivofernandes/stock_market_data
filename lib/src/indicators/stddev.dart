@@ -5,8 +5,7 @@ import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 class STDDEV {
   static double atEnd(List<YahooFinanceCandleData> prices, int period) {
     if (prices.length < period) {
-      throw Exception(
-          'The prices list is just ${prices.length} and not enough to calculate a STDDEV_$period');
+      throw Exception('The prices list is just ${prices.length} and not enough to calculate a STDDEV_$period');
     }
 
     double mean = 0;
@@ -26,8 +25,7 @@ class STDDEV {
 
   static void calculateSTDDEV(List<YahooFinanceCandleData> prices, int period) {
     if (prices.length < period) {
-      throw Exception(
-          'The prices list is just ${prices.length} and not enough to calculate a STDDEV_$period');
+      throw Exception('The prices list is just ${prices.length} and not enough to calculate a STDDEV_$period');
     }
 
     double sum = 0;
@@ -42,8 +40,8 @@ class STDDEV {
       varianceSum += pow(prices[j].adjClose - mean, 2);
     }
 
-    prices[period - 1].indicators['STDDEV_$period'] =
-        sqrt(varianceSum / period);
+    double absoluteStddev = sqrt(varianceSum / period);
+    prices[period - 1].indicators['STDDEV_$period'] = absoluteStddev / prices[period - 1].adjClose * 100;
 
     for (int i = period; i < prices.length; i++) {
       sum -= prices[i - period].adjClose;
@@ -54,7 +52,9 @@ class STDDEV {
       for (int j = i - period; j <= i; j++) {
         varianceSum += pow(prices[j].adjClose - mean, 2);
       }
-      prices[i].indicators['STDDEV_$period'] = sqrt(varianceSum / period);
+
+      absoluteStddev = sqrt(varianceSum / period);
+      prices[i].indicators['STDDEV_$period'] = absoluteStddev / prices[i].adjClose * 100;
     }
   }
 }

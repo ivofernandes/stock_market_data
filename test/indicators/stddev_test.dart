@@ -11,7 +11,7 @@ void main() {
 
     assert(prices.last.indicators.containsKey('STDDEV_20'));
 
-    assert(prices[19].indicators['STDDEV_20']!.toStringAsFixed(3) == '0.103');
-    assert(prices[20].indicators['STDDEV_20']!.toStringAsFixed(3) == '0.123');
+    assert(prices[19].indicators['STDDEV_20']!.toStringAsFixed(3) == '3.623');
+    assert(prices[20].indicators['STDDEV_20']!.toStringAsFixed(3) == '4.189');
   });
 }
