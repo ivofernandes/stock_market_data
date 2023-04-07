@@ -50,6 +50,12 @@ class CalculateIndicators {
       case 'STDDEV':
         STDDEV.calculateSTDDEV(prices, period);
         return true;
+      case 'EMASTDDEV':
+        STDDEV.calculateEMASTDDEV(prices, period);
+        return true;
+      case 'EWMSTD':
+        STDDEV.calculateEWMSTD(prices, period);
+        return true;
       case 'VWMA':
         VWMA.calculateVWMA(prices, period);
         return true;
