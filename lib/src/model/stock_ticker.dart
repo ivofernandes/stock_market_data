@@ -3,7 +3,10 @@ import 'package:flutter/cupertino.dart';
 /// Represent an investment instrument
 @immutable
 class StockTicker {
+  /// The symbol of the stock
   final String symbol;
+
+  /// The name description of the stock
   final String? description;
 
   const StockTicker({

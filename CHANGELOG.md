@@ -15,3 +15,6 @@ Fixed a bug in the calculation of the EMA, now is tested against python pandas a
 
 ## 0.0.6
 New EMA formula of weighted average
+
+## 0.0.7
+Updated dependencies

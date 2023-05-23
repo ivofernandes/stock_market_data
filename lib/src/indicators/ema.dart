@@ -32,7 +32,7 @@ class EMA {
           'The prices list is just ${prices.length} and not enough to calculate a EMA_$period');
     }
 
-    final double alpha = 2 / (period + 1.0); // Changed the alpha calculation
+    final double alpha = 2 / (period + 1.0);
     double ema = prices[0].adjClose;
 
     // Calculate the EMA for all the prices

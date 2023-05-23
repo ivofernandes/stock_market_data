@@ -92,4 +92,36 @@ Output:
     assert(ema[6] == 174.9669009036391);
     assert(ema[7] == 185.54160989085182);
   });
+
+  /*
+  import pandas as pd
+
+data = {
+    'prices': [
+      0,
+      56.0,
+      0,
+      0.0,
+      51.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+}
+
+df = pd.DataFrame(data)
+
+# Calculate the 7-day EMA
+df['ema_7'] = df['prices'].ewm(span=7, adjust=False).mean()
+
+print(df)
+   */
+  test('Extra test of EMA against python data rolling data 7', () {
+    final List<double> values = [0, 56.0, 0, 0.0, 51.0, 0.0, 0.0, 0.0];
+
+    final ema =
+        CalculateIndicators.calculateIndicatorsOnValues(values, 'EMA_7');
+
+    assert(ema[7] == 7.87060546875);
+  });
 }
