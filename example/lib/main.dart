@@ -36,14 +36,21 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Container(
         padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
+        child: const SingleChildScrollView(
           child: Column(
-            children: const [
+            children: [
               SizedBox(
                 height: 355,
                 width: double.infinity,
                 child: BuyAndHoldResult(
                   exampleTicker: 'AAPL',
+                ),
+              ),
+              SizedBox(
+                height: 355,
+                width: double.infinity,
+                child: BuyAndHoldResult(
+                  exampleTicker: 'VUSA.AS',
                 ),
               ),
               SizedBox(
@@ -63,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class BuyAndHoldResult extends StatefulWidget {
   final String exampleTicker;
+
   const BuyAndHoldResult({
     required this.exampleTicker,
     super.key,
@@ -113,15 +121,34 @@ class _BuyAndHoldResultState extends State<BuyAndHoldResult> {
                           height: 20,
                         ),
                         _BackTestResult(backTest),
-                        MaterialButton(
-                          onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  _IndicatorsData(controller.text),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MaterialButton(
+                              onPressed: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => _IndicatorsData(controller.text),
+                                ),
+                              ),
+                              color: Colors.teal,
+                              child: const Text('Indicators'),
                             ),
-                          ),
-                          color: Colors.teal,
-                          child: const Text('Indicators'),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            MaterialButton(
+                              onPressed: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => _YearStatsWidget(controller.text),
+                                ),
+                              ),
+                              color: Colors.orange,
+                              child: const Text('Year stats'),
+                            ),
+                          ],
                         )
                       ],
                     ),
@@ -136,8 +163,7 @@ class _BuyAndHoldResultState extends State<BuyAndHoldResult> {
       loading = true;
       setState(() {});
 
-      backTest = await StockMarketDataService()
-          .getBackTestResultForSymbol(controller.text);
+      backTest = await StockMarketDataService().getBackTestResultForSymbol(controller.text);
       loading = false;
       setState(() {});
     } catch (e) {
@@ -149,6 +175,7 @@ class _BuyAndHoldResultState extends State<BuyAndHoldResult> {
 
 class _BackTestResult extends StatelessWidget {
   final BuyAndHoldStrategyResult backTest;
+
   const _BackTestResult(this.backTest);
 
   @override
@@ -215,8 +242,97 @@ class _BackTestResult extends StatelessWidget {
   }
 }
 
+class _YearStatsWidget extends StatefulWidget {
+  final String symbol;
+
+  const _YearStatsWidget(
+    this.symbol,
+  );
+
+  @override
+  State<_YearStatsWidget> createState() => _YearStatsWidgetState();
+}
+
+class _YearStatsWidgetState extends State<_YearStatsWidget> {
+  @override
+  void initState() {
+    super.initState();
+    load();
+  }
+
+  List<YahooFinanceCandleData> prices = [];
+  List<YearlyStats> yearlyStats = [];
+
+  void load() async {
+    YahooFinanceResponse response = await const YahooFinanceDailyReader().getDailyDTOs(
+      widget.symbol,
+    );
+
+    prices = response.candlesData;
+    yearlyStats = YearlyCalculations.calculate(prices);
+
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Year stats'),
+      ),
+      body: Column(
+        children: [
+          const Row(
+            children: [
+              Expanded(
+                child: Text('Year'),
+              ),
+              Expanded(
+                child: Text('Variation'),
+              ),
+              Expanded(
+                child: Text('Drawdown'),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: yearlyStats.length,
+              itemBuilder: (context, index) {
+                final YearlyStats currentYearlyStat = yearlyStats[index]!;
+
+                return Row(
+                  children: [
+                    Expanded(
+                      child: Text(currentYearlyStat.year.toString()),
+                    ),
+                    Expanded(
+                      child: Text(
+                        currentYearlyStat.variation.toStringAsFixed(2),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        currentYearlyStat.drawdown.toStringAsFixed(2),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _IndicatorsData extends StatefulWidget {
   final String symbol;
+
   const _IndicatorsData(
     this.symbol,
   );
@@ -227,8 +343,7 @@ class _IndicatorsData extends StatefulWidget {
 
 class _IndicatorsDataState extends State<_IndicatorsData> {
   final TextEditingController indicatorsController = TextEditingController(
-    text:
-        'SMA_20,EMA_20,RSI_20,STDDEV_20,VWMA_20,BB_20,%R_20,MFI_14,BOP_14,P_1',
+    text: 'SMA_20,EMA_20,RSI_20,STDDEV_20,VWMA_20,BB_20,%R_20,MFI_14,BOP_14,P_1',
   );
 
   List<YahooFinanceCandleData> prices = [];
@@ -298,8 +413,7 @@ class _PriceWithIndicators extends StatelessWidget {
             Text('Close: ${candle.close}'),
             Column(
                 children: candle.indicators.keys
-                    .map((key) => Text(
-                        '$key: ${candle.indicators[key]?.toStringAsFixed(2)}'))
+                    .map((key) => Text('$key: ${candle.indicators[key]?.toStringAsFixed(2)}'))
                     .toList())
           ],
         ),
