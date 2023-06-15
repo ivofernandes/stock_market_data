@@ -9,10 +9,12 @@ class YearlyStats {
   /// How much was the maximum fall of the asset
   double drawdown;
 
-  YearlyStats(
-      {required this.year, required this.variation, required this.drawdown});
+  YearlyStats({
+    required this.year,
+    required this.variation,
+    required this.drawdown,
+  });
 
   @override
-  String toString() =>
-      'BaseStats{year: $year, variation: $variation, drawdown: $drawdown}';
+  String toString() => 'BaseStats{year: $year, variation: $variation, drawdown: $drawdown}';
 }
