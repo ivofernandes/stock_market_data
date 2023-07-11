@@ -3,6 +3,7 @@ library stock_market_data;
 export 'package:stock_market_data/src/data/ticker_resolve.dart';
 export 'package:stock_market_data/src/data/tickers_list.dart';
 export 'package:stock_market_data/src/indicators/variations.dart';
+export 'package:stock_market_data/src/math/list_stats.dart';
 export 'package:stock_market_data/src/model/stock_ticker.dart';
 export 'package:stock_market_data/src/model/strategy/base_strategy_result.dart';
 export 'package:stock_market_data/src/model/strategy/buy_and_hold_strategy_result.dart';
