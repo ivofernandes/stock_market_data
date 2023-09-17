@@ -3,6 +3,15 @@ import 'dart:math';
 import 'package:stock_market_data/src/indicators/ema.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
+/// `STDDEV` is a class responsible for calculating various types
+/// of standard deviations based on stock market prices.
+/// This indicator tries to normalize the deviation in relation to the price
+///
+/// It provides functionalities to compute:
+/// - Standard Deviation for a specific period at the end of the price data
+/// - Standard Deviation for all data points in a rolling window
+/// - Exponential Moving Standard Deviation (EMSTD)
+/// - Exponentially Weighted Moving Standard Deviation (EWMSTD)
 class STDDEV {
   static double atEnd(List<YahooFinanceCandleData> prices, int period) {
     if (prices.length < period) {
