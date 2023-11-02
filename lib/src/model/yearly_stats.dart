@@ -16,5 +16,6 @@ class YearlyStats {
   });
 
   @override
-  String toString() => 'BaseStats{year: $year, variation: $variation, drawdown: $drawdown}';
+  String toString() =>
+      'BaseStats{year: $year, variation: $variation, drawdown: $drawdown}';
 }

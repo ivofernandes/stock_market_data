@@ -130,7 +130,8 @@ class _BuyAndHoldResultState extends State<BuyAndHoldResult> {
                             MaterialButton(
                               onPressed: () => Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => _IndicatorsData(controller.text),
+                                  builder: (context) =>
+                                      _IndicatorsData(controller.text),
                                 ),
                               ),
                               color: Colors.teal,
@@ -142,7 +143,8 @@ class _BuyAndHoldResultState extends State<BuyAndHoldResult> {
                             MaterialButton(
                               onPressed: () => Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => _YearStatsWidget(controller.text),
+                                  builder: (context) =>
+                                      _YearStatsWidget(controller.text),
                                 ),
                               ),
                               color: Colors.orange,
@@ -163,7 +165,8 @@ class _BuyAndHoldResultState extends State<BuyAndHoldResult> {
       loading = true;
       setState(() {});
 
-      backTest = await StockMarketDataService().getBackTestResultForSymbol(controller.text);
+      backTest = await StockMarketDataService()
+          .getBackTestResultForSymbol(controller.text);
       loading = false;
       setState(() {});
     } catch (e) {
@@ -264,7 +267,8 @@ class _YearStatsWidgetState extends State<_YearStatsWidget> {
   List<YearlyStats> yearlyStats = [];
 
   void load() async {
-    YahooFinanceResponse response = await const YahooFinanceDailyReader().getDailyDTOs(
+    YahooFinanceResponse response =
+        await const YahooFinanceDailyReader().getDailyDTOs(
       widget.symbol,
     );
 
@@ -343,7 +347,8 @@ class _IndicatorsData extends StatefulWidget {
 
 class _IndicatorsDataState extends State<_IndicatorsData> {
   final TextEditingController indicatorsController = TextEditingController(
-    text: 'SMA_20,EMA_20,RSI_20,STDDEV_20,VWMA_20,BB_20,%R_20,MFI_14,BOP_14,P_1',
+    text:
+        'SMA_20,EMA_20,RSI_20,STDDEV_20,VWMA_20,BB_20,%R_20,MFI_14,BOP_14,P_1',
   );
 
   List<YahooFinanceCandleData> prices = [];
@@ -413,7 +418,8 @@ class _PriceWithIndicators extends StatelessWidget {
             Text('Close: ${candle.close}'),
             Column(
                 children: candle.indicators.keys
-                    .map((key) => Text('$key: ${candle.indicators[key]?.toStringAsFixed(2)}'))
+                    .map((key) => Text(
+                        '$key: ${candle.indicators[key]?.toStringAsFixed(2)}'))
                     .toList())
           ],
         ),

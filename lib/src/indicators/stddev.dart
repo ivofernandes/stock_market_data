@@ -15,7 +15,8 @@ import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 class STDDEV {
   static double atEnd(List<YahooFinanceCandleData> prices, int period) {
     if (prices.length < period) {
-      throw Exception('The prices list is just ${prices.length} and not enough to calculate a STDDEV_$period');
+      throw Exception(
+          'The prices list is just ${prices.length} and not enough to calculate a STDDEV_$period');
     }
 
     double mean = 0;
@@ -35,7 +36,8 @@ class STDDEV {
 
   static void calculateSTDDEV(List<YahooFinanceCandleData> prices, int period) {
     if (prices.length < period) {
-      throw Exception('The prices list is just ${prices.length} and not enough to calculate a STDDEV_$period');
+      throw Exception(
+          'The prices list is just ${prices.length} and not enough to calculate a STDDEV_$period');
     }
 
     double sum = 0;
@@ -51,7 +53,8 @@ class STDDEV {
     }
 
     double absoluteStddev = sqrt(varianceSum / period);
-    prices[period - 1].indicators['STDDEV_$period'] = absoluteStddev / prices[period - 1].adjClose * 100;
+    prices[period - 1].indicators['STDDEV_$period'] =
+        absoluteStddev / prices[period - 1].adjClose * 100;
 
     for (int i = period; i < prices.length; i++) {
       sum -= prices[i - period].adjClose;
@@ -64,13 +67,16 @@ class STDDEV {
       }
 
       absoluteStddev = sqrt(varianceSum / period);
-      prices[i].indicators['STDDEV_$period'] = absoluteStddev / prices[i].adjClose * 100;
+      prices[i].indicators['STDDEV_$period'] =
+          absoluteStddev / prices[i].adjClose * 100;
     }
   }
 
-  static void calculateEMASTDDEV(List<YahooFinanceCandleData> prices, int period) {
+  static void calculateEMASTDDEV(
+      List<YahooFinanceCandleData> prices, int period) {
     if (prices.length < period) {
-      throw Exception('The prices list is just ${prices.length} and not enough to calculate an EMSTDDEV_$period');
+      throw Exception(
+          'The prices list is just ${prices.length} and not enough to calculate an EMSTDDEV_$period');
     }
 
     final double alpha = 2 / (period + 1.0);
@@ -94,7 +100,8 @@ class STDDEV {
 
   static void calculateEWMSTD(List<YahooFinanceCandleData> prices, int period) {
     if (prices.length < period) {
-      throw Exception('The prices list is just ${prices.length} and not enough to calculate an EWMSTD_$period');
+      throw Exception(
+          'The prices list is just ${prices.length} and not enough to calculate an EWMSTD_$period');
     }
 
     EMA.calculateEMA(prices, period);

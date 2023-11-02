@@ -15,7 +15,8 @@ import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 class CalculateIndicators {
   /// Add indicators values in a list of candle prices
   /// Return true if all the indicators were found and calculated
-  static bool calculateIndicators(List<YahooFinanceCandleData> prices, List<String> indicators) {
+  static bool calculateIndicators(
+      List<YahooFinanceCandleData> prices, List<String> indicators) {
     bool allFound = true;
 
     // Calculate the indicators one by one
@@ -25,7 +26,8 @@ class CalculateIndicators {
         final String indicatorType = indicatorValidated.keys.first;
         final int indicatorPeriod = indicatorValidated[indicatorType]!;
 
-        allFound = allFound && _calculateIndicator(prices, indicatorType, indicatorPeriod);
+        allFound = allFound &&
+            _calculateIndicator(prices, indicatorType, indicatorPeriod);
       }
     }
     return allFound;
@@ -33,7 +35,8 @@ class CalculateIndicators {
 
   /// Calculate the indicator values on a list of prices
   /// Return true if the indicator was found and calculated
-  static bool _calculateIndicator(List<YahooFinanceCandleData> prices, String indicator, int period) {
+  static bool _calculateIndicator(
+      List<YahooFinanceCandleData> prices, String indicator, int period) {
     switch (indicator) {
       case 'SMA':
         SMA.calculateSMA(prices, period);
@@ -101,7 +104,9 @@ class CalculateIndicators {
 
       _calculateIndicator(prices, indicatorType, indicatorPeriod);
 
-      calculated.addAll(prices.map((e) => e.indicators.containsKey(indicator) ? e.indicators[indicator]! : null));
+      calculated.addAll(prices.map((e) => e.indicators.containsKey(indicator)
+          ? e.indicators[indicator]!
+          : null));
     }
 
     return calculated;

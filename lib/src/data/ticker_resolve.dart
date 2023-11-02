@@ -4,7 +4,7 @@ import 'package:stock_market_data/src/model/stock_ticker.dart';
 class TickerResolve {
   /// Get a description for a ticker
   static String getTickerDescription(StockTicker ticker) {
-    if (ticker.description != null) {
+    if (ticker.description != null && ticker.description!.isNotEmpty) {
       return ticker.description!;
     } else {
       final String symbol = ticker.symbol;

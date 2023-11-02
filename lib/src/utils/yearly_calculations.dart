@@ -31,13 +31,16 @@ class YearlyCalculations {
   }
 
   /// Add year, cagr and drawdown to the yearly stats
-  static void _addToResult(List<YearlyStats> result, int currentYear, List<YahooFinanceCandleData> candlesOfTheYear) {
+  static void _addToResult(List<YearlyStats> result, int currentYear,
+      List<YahooFinanceCandleData> candlesOfTheYear) {
     // To have variation needs two days at least
     if (candlesOfTheYear.length > 1) {
-      final StrategyDrawdown strategyDrawdown = CalculateDrawdown.calculateStrategyDrawdown(candlesOfTheYear);
+      final StrategyDrawdown strategyDrawdown =
+          CalculateDrawdown.calculateStrategyDrawdown(candlesOfTheYear);
       final double drawdown = strategyDrawdown.maxDrawdown;
 
-      final double variation = CalculateStrategyMetrics.calculateVariation(candlesOfTheYear);
+      final double variation =
+          CalculateStrategyMetrics.calculateVariation(candlesOfTheYear);
 
       result.add(
         YearlyStats(

@@ -8,7 +8,8 @@ void main() {
     });
 
     test('Calculate Standard Deviation', () {
-      expect(ListStats.calculateStdDev([1.0, 2.0, 3.0, 4.0, 5.0]), closeTo(1.581, 0.001));
+      expect(ListStats.calculateStdDev([1.0, 2.0, 3.0, 4.0, 5.0]),
+          closeTo(1.581, 0.001));
     });
   });
 }

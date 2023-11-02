@@ -11,17 +11,17 @@ class BuyAndHoldStrategyResult extends BaseStrategyResult {
   BuyAndHoldStrategyResult();
 
   Map<String, dynamic> toJson() => {
-      'progress': progress,
-      'startDate': startDate.toString(),
-      'endDate': endDate.toString(),
-      'tradingYears': tradingYears,
-      'cagr': cagr,
-      'maxDrawdown': maxDrawdown,
-      'mar': mar,
-      'currentDrawdown': currentDrawdown,
-      'tradesNum': tradesNum,
-      'endPrice': endPrice,
-    };
+        'progress': progress,
+        'startDate': startDate.toString(),
+        'endDate': endDate.toString(),
+        'tradingYears': tradingYears,
+        'cagr': cagr,
+        'maxDrawdown': maxDrawdown,
+        'mar': mar,
+        'currentDrawdown': currentDrawdown,
+        'tradesNum': tradesNum,
+        'endPrice': endPrice,
+      };
 
   factory BuyAndHoldStrategyResult.fromJson(Map<String, dynamic> resultJson) =>
       BuyAndHoldStrategyResult()

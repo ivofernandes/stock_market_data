@@ -7,12 +7,15 @@ class StockMarketDataService {
   // Singleton
   static final StockMarketDataService _singleton =
       StockMarketDataService._internal();
+
   factory StockMarketDataService() => _singleton;
+
   StockMarketDataService._internal();
 
   /// Get a backtest of buy and hold on a given symbol
   Future<BuyAndHoldStrategyResult> getBackTestResultForSymbol(
-      String symbol) async {
+    String symbol,
+  ) async {
     final List<YahooFinanceCandleData> prices =
         await YahooFinanceService().getTickerData(symbol);
 

@@ -19,7 +19,7 @@ class BuyAndHoldStrategy {
       final double buyPrice =
           prices.first.open; // Buy in the open of the first day
       final double sellPrice =
-          prices.last.close; // Sell on close of the last day
+          prices.last.adjClose; // Sell on close of the last day
       strategy.endPrice = sellPrice;
 
       _calculateStrategyMetrics(prices, buyPrice, sellPrice, strategy);
