@@ -1,6 +1,6 @@
 name: stock_market_data
 description: Package to get base indicators from the stock and base stats like buy and hold CAGR and total drawdown
-version: 0.0.9
+version: 0.0.10
 homepage: https://incaview.com
 repository: https://github.com/ivofernandes/stock_market_data
 

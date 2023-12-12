@@ -24,3 +24,6 @@ Bug fixes
 
 ## 0.0.9
 Updated dependencies
+
+## 0.0.10
+Improved documentation
