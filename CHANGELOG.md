@@ -27,3 +27,6 @@ Updated dependencies
 
 ## 0.0.10
 Improved documentation
+
+## 0.0.11
+Fixed errors in company tickers

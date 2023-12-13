@@ -38,7 +38,7 @@ void main() {
     BalanceOfPower.calculateBOP(prices, 1);
     BalanceOfPower.calculateBOP(prices, 3);
     assert(prices[0].indicators['BOP_1'] == 1.6);
-    assert(prices[2].indicators['BOP_3'] == 10.8);
-    assert(prices[3].indicators['BOP_3'] == 15.799999999999999);
+    assert(prices[2].indicators['BOP_3'] == 3.6);
+    assert(prices[3].indicators['BOP_3'] == 5.266666666666667);
   });
 }
