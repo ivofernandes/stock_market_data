@@ -3,8 +3,13 @@ import 'dart:math';
 import 'package:stock_market_data/src/model/variation/variation_count.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
+/// A class for analyzing variations in stock market data.
 class Variations {
-  /// Base method to get intervals from the chart
+  /// Counts the occurrences of variations within specified intervals.
+  ///
+  /// Takes [lowerLimit] and [upperLimit] as the range of interest, [step] as the interval size,
+  /// a list of [YahooFinanceCandleData] as [data], and [delta] as the period for variation calculation.
+  /// Returns a list of [VariationCount] objects representing the count of variations in each interval.
   static List<VariationCount> countByInterval(
       double lowerLimit,
       double upperLimit,
@@ -18,6 +23,7 @@ class Variations {
     return _countVariationsInIntervals(intervals, data, delta);
   }
 
+  /// Generates a map of intervals for variation analysis.
   static Map<String, List<double?>> _getIntervals(
       double lowerLimit, double upperLimit, double interval, int precision) {
     final Map<String, List<double?>> intervals = {
@@ -40,6 +46,7 @@ class Variations {
     return intervals;
   }
 
+  /// Calculates variations over a specified period [delta] and stores them in the [prices] data.
   static List<VariationCount> _countVariationsInIntervals(
       Map<String, List<double?>> intervals,
       List<YahooFinanceCandleData> data,
@@ -58,7 +65,7 @@ class Variations {
     return result;
   }
 
-  ///
+  /// Calculates variations over a specified period [delta] and stores them in the [prices] data.
   static void calculateVariations(
       List<YahooFinanceCandleData> prices, int delta) {
     for (int i = 0; i < prices.length - delta; i++) {
@@ -69,6 +76,7 @@ class Variations {
     }
   }
 
+  /// Counts variations between optional [lowerLimit] and [upperLimit] in given [data].
   static int _countVariations(double? lowerLimit, double? upperLimit,
       List<YahooFinanceCandleData> data, int delta) {
     final int count = data

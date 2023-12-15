@@ -1,6 +1,13 @@
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
+/// A class for calculating the Relative Strength Index (RSI).
 class RSI {
+  /// Calculates and applies the Relative Strength Index (RSI) to each element in a list of prices.
+  ///
+  /// This method takes a list of [YahooFinanceCandleData] and an [int] period for RSI calculation.
+  /// It then modifies the provided list by calculating and storing the RSI within each data point.
+  ///
+  /// The RSI is calculated based on price changes over the specified period.
   static void calculateRSI(List<YahooFinanceCandleData> prices, int period) {
     // Initialize variables to track gains and losses, as well as the relative strength (RS)
     double gains = 0;

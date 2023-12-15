@@ -5,6 +5,9 @@ class BuyAndHoldStrategyResult extends BaseStrategyResult {
   /// End price of the strategy
   double endPrice = 0;
 
+  /// Yesterday price, useful to calculate the current day variation
+  double yesterdayPrice = 0;
+
   /// Moving averages at the end of the strategy
   Map<int, double> movingAverages = {};
 
@@ -14,6 +17,7 @@ class BuyAndHoldStrategyResult extends BaseStrategyResult {
         'progress': progress,
         'startDate': startDate.toString(),
         'endDate': endDate.toString(),
+        'yesterdayPrice': yesterdayPrice,
         'tradingYears': tradingYears,
         'cagr': cagr,
         'maxDrawdown': maxDrawdown,
@@ -34,5 +38,6 @@ class BuyAndHoldStrategyResult extends BaseStrategyResult {
         ..mar = resultJson['mar'] as double
         ..currentDrawdown = resultJson['currentDrawdown'] as double
         ..tradesNum = resultJson['tradesNum'] as int
-        ..endPrice = resultJson['endPrice'] as double;
+        ..endPrice = resultJson['endPrice'] as double
+        ..yesterdayPrice = resultJson['yesterdayPrice'] as double;
 }

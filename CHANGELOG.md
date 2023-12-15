@@ -30,3 +30,6 @@ Improved documentation
 
 ## 0.0.11
 Fixed errors in company tickers
+
+## 0.0.12
+Added yesterday price in the strategy result

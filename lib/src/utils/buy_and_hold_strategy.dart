@@ -22,6 +22,8 @@ class BuyAndHoldStrategy {
           prices.last.adjClose; // Sell on close of the last day
       strategy.endPrice = sellPrice;
 
+      strategy.yesterdayPrice = prices[prices.length - 2].adjClose;
+
       _calculateStrategyMetrics(prices, buyPrice, sellPrice, strategy);
     }
     strategy.progress = 100;
