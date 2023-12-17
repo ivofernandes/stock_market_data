@@ -33,3 +33,6 @@ Fixed errors in company tickers
 
 ## 0.0.12
 Added yesterday price in the strategy result
+
+## 0.1.0
+Sorted sp500 companies by market cap
