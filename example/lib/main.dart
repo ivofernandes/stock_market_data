@@ -306,7 +306,7 @@ class _YearStatsWidgetState extends State<_YearStatsWidget> {
             child: ListView.builder(
               itemCount: yearlyStats.length,
               itemBuilder: (context, index) {
-                final YearlyStats currentYearlyStat = yearlyStats[index]!;
+                final YearlyStats currentYearlyStat = yearlyStats[index];
 
                 return Row(
                   children: [

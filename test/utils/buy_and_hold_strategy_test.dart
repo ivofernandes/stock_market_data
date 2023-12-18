@@ -68,24 +68,21 @@ void main() {
   });
 
   test('Buy and hold for Berkshire', () async {
-    const String symbol = 'SRC';
-    final List<YahooFinanceCandleData> prices =
-        await YahooFinanceService().getTickerData(
-      symbol,
-      useCache: false,
-      adjust: true,
-    );
-
     const String berkshireTicker = 'BRK-B';
     final bool hasBerkshireTicker =
         TickersList.companies.containsKey(berkshireTicker);
     assert(hasBerkshireTicker);
 
+    final List<YahooFinanceCandleData> prices =
+        await YahooFinanceService().getTickerData(
+      berkshireTicker,
+      useCache: false,
+      adjust: true,
+    );
     final BuyAndHoldStrategyResult buyAndHold =
         BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
 
     assert(buyAndHold.progress == 100);
     assert(buyAndHold.tradingYears > 10);
-    print(buyAndHold.cagr);
   });
 }

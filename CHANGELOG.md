@@ -36,3 +36,6 @@ Added yesterday price in the strategy result
 
 ## 0.1.0
 Sorted sp500 companies by market cap
+
+## 0.1.1
+Added more futures
