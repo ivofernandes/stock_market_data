@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:stock_market_data/src/utils/drawdown/strategy_drawdown.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
+/// Class to calculate the drawdown of the buy and hold strategy_result
+/// A drawdown is the peak-to-trough decline during a specific recorded period of an investment, fund, or commodity.
 class CalculateDrawdown {
   /// Calculate the drawdown of the buy and hold strategy_result
   static StrategyDrawdown calculateStrategyDrawdown(

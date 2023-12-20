@@ -1,5 +1,6 @@
 import 'dart:math';
 
+/// Class to calculate statistics of a list: mean, standard deviation
 abstract class ListStats {
   static double calculateMean(List<double> list) {
     double sum = 0;

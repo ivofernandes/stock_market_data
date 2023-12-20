@@ -3,6 +3,7 @@ import 'package:stock_market_data/src/utils/buy_and_hold_strategy.dart';
 import 'package:stock_market_data/src/utils/calculate_indicators.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
+/// Service to get stock market data
 class StockMarketDataService {
   // Singleton
   static final StockMarketDataService _singleton =

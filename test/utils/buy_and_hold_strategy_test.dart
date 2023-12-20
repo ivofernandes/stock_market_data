@@ -63,8 +63,7 @@ void main() {
     final BuyAndHoldStrategyResult buyAndHold =
         BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
 
-    assert(buyAndHold.progress == 100);
-    assert(buyAndHold.tradingYears > 10);
+    basicStrategyValidation(buyAndHold);
   });
 
   test('Buy and hold for Berkshire', () async {
@@ -82,7 +81,35 @@ void main() {
     final BuyAndHoldStrategyResult buyAndHold =
         BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
 
-    assert(buyAndHold.progress == 100);
-    assert(buyAndHold.tradingYears > 10);
+    basicStrategyValidation(buyAndHold);
   });
+
+  test('Buy and hold for Ambev', () async {
+    const String ambevTicker = 'ABEV';
+
+    final List<YahooFinanceCandleData> prices =
+        await YahooFinanceService().getTickerData(
+      ambevTicker,
+      useCache: false,
+      adjust: true,
+    );
+    final BuyAndHoldStrategyResult buyAndHold =
+        BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
+
+    basicStrategyValidation(buyAndHold);
+  });
+}
+
+void basicStrategyValidation(BuyAndHoldStrategyResult buyAndHold) {
+  assert(buyAndHold.progress == 100);
+  assert(buyAndHold.tradingYears > 10);
+
+  assert(!buyAndHold.cagr.isNaN);
+  assert(buyAndHold.maxDrawdown.isFinite);
+
+  assert(buyAndHold.mar.isFinite);
+
+  assert(buyAndHold.currentDrawdown.isFinite);
+  assert(buyAndHold.endPrice > 0);
+  assert(buyAndHold.maxDrawdown < 0);
 }

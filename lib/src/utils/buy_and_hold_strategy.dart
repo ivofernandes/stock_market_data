@@ -7,8 +7,15 @@ import 'package:stock_market_data/src/utils/drawdown/calculate_drawdown.dart';
 import 'package:stock_market_data/src/utils/drawdown/strategy_drawdown.dart';
 import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 
+/// The `BuyAndHoldStrategy` class provides methods to simulate and analyze a buy and hold strategy
+/// using financial data, specifically Yahoo Finance candle data. This strategy involves buying a
+/// financial instrument at an initial time point and holding onto it for a certain period, typically
+/// until the end of the dataset.
 class BuyAndHoldStrategy {
-  /// Simulate a buy and hold strategy_result in the entire dataframe
+  /// Simulates a buy and hold strategy on a given list of [YahooFinanceCandleData] prices.
+  ///
+  /// This method analyzes the price data to calculate various metrics such as CAGR, drawdowns, and MAR ratio.
+  /// Additionally, it updates the strategy result with moving averages and logs.
   static BuyAndHoldStrategyResult buyAndHoldAnalysis(
       List<YahooFinanceCandleData> prices) {
     final BuyAndHoldStrategyResult strategy =
@@ -16,25 +23,27 @@ class BuyAndHoldStrategy {
             as BuyAndHoldStrategyResult;
 
     if (prices.isNotEmpty) {
-      final double buyPrice =
-          prices.first.open; // Buy in the open of the first day
+      double buyPrice = _getValidBuyPrice(prices);
       final double sellPrice =
           prices.last.adjClose; // Sell on close of the last day
-      strategy.endPrice = sellPrice;
 
-      strategy.previousClosePrice = prices[prices.length - 2].adjClose;
+      strategy
+        ..endPrice = sellPrice
+        ..previousClosePrice = prices[prices.length - 2].adjClose;
 
       _calculateStrategyMetrics(prices, buyPrice, sellPrice, strategy);
     }
+
     strategy.progress = 100;
-
     _addIndicators(prices, strategy);
-
     strategy.logs['buyAndHoldEnded'] = DateTime.now();
+
     return strategy;
   }
 
-  /// Add current price indicators to a strategy_result: SMA
+  /// Adds current price indicators (SMA) to a [BuyAndHoldStrategyResult].
+  ///
+  /// The method calculates moving averages for periods of 20, 50, and 200 days.
   static void _addIndicators(
       List<YahooFinanceCandleData> prices, BuyAndHoldStrategyResult strategy) {
     final List<int> periods = [20, 50, 200];
@@ -44,20 +53,32 @@ class BuyAndHoldStrategy {
     }
   }
 
-  /// Calculate CAGR drawdown and MAR of an strategy_result
+  /// Calculates CAGR, drawdown, and MAR of a [BuyAndHoldStrategyResult].
+  ///
+  /// This method utilizes the buy and sell prices to calculate the Compound Annual Growth Rate (CAGR),
+  /// Maximum Drawdown, and the MAR ratio.
   static void _calculateStrategyMetrics(List<YahooFinanceCandleData> prices,
       double buyPrice, double sellPrice, BuyAndHoldStrategyResult strategy) {
-    // https://www.investopedia.com/terms/c/cagr.asp
     strategy.cagr =
         (pow(sellPrice / buyPrice, 1 / strategy.tradingYears) - 1) * 100;
 
     final StrategyDrawdown strategyDrawdown =
         CalculateDrawdown.calculateStrategyDrawdown(prices);
 
-    strategy.maxDrawdown = strategyDrawdown.maxDrawdown;
-    strategy.currentDrawdown = strategyDrawdown.currentDrawdown;
+    strategy
+      ..maxDrawdown = strategyDrawdown.maxDrawdown
+      ..currentDrawdown = strategyDrawdown.currentDrawdown
+      ..mar = strategy.cagr / strategy.maxDrawdown * -1;
+  }
 
-    // https://www.investopedia.com/terms/m/mar-ratio.asp
-    strategy.mar = strategy.cagr / strategy.maxDrawdown * -1;
+  /// Gets a valid buy price from the first entry of the prices list.
+  ///
+  /// If the opening price is zero, it uses the closing price as a fallback.
+  static double _getValidBuyPrice(List<YahooFinanceCandleData> prices) {
+    double buyPrice = prices.first.open;
+    if (buyPrice == 0) {
+      buyPrice = prices.first.close;
+    }
+    return buyPrice;
   }
 }

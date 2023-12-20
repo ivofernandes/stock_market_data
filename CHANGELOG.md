@@ -39,3 +39,6 @@ Sorted sp500 companies by market cap
 
 ## 0.1.1
 Added more futures
+
+## 0.1.2
+Workaround in CAGR calculation when the open is 0

@@ -156,6 +156,7 @@ class TickersList {
     'GXG': 'Colombia Capped',
     'FJP': 'Japan AlphaDEX',
     'FLFR': 'France AlphaDEX',
+    'EZA': 'South Africa',
   };
 
   static Map<String, String> futures = {
