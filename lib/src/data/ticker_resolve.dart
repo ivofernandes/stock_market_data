@@ -21,6 +21,8 @@ class TickerResolve {
         return TickersList.companies[symbol]!;
       } else if (TickersList.countries[symbol] != null) {
         return TickersList.countries[symbol]!;
+      } else if (TickersList.europeanEtfs[symbol] != null) {
+        return TickersList.europeanEtfs[symbol]!;
       }
 
       return symbol;

@@ -17,8 +17,8 @@ class TickersList {
     'EEM': 'iShares MSCI Emerging Markets ETF', // Tracks the MSCI Emerging Markets Index
     'EWJ': 'iShares MSCI Japan ETF', // Tracks Japanese market
     'FXI': 'iShares China Large-Cap ETF', // Tracks the FTSE China 50 Index (large-cap Chinese stocks)
-    'SPY': 'S&P 500 ETF', // Tracks the S&P 500 Index
-    'QQQ': 'Nasdaq ETF', // Tracks the Morningstar Exponential Technologies Index
+    'SPY': 'S&P 500 ETF',
+    'QQQ': 'Nasdaq ETF',
   };
 
   /// As we in europe are very blocked by regulators to use the US main ETFs,
