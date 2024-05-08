@@ -6,8 +6,7 @@ import 'package:yahoo_finance_data_reader/yahoo_finance_data_reader.dart';
 /// Service to get stock market data
 class StockMarketDataService {
   // Singleton
-  static final StockMarketDataService _singleton =
-      StockMarketDataService._internal();
+  static final StockMarketDataService _singleton = StockMarketDataService._internal();
 
   factory StockMarketDataService() => _singleton;
 
@@ -17,17 +16,21 @@ class StockMarketDataService {
   Future<BuyAndHoldStrategyResult> getBackTestResultForSymbol(
     String symbol,
   ) async {
-    final List<YahooFinanceCandleData> prices =
-        await YahooFinanceService().getTickerData(symbol);
+    final List<YahooFinanceCandleData> prices = await YahooFinanceService().getTickerData(symbol);
 
     return BuyAndHoldStrategy.buyAndHoldAnalysis(prices);
   }
 
   /// Get a dataframe for a symbol with the required indicators
   Future<List<YahooFinanceCandleData>> getCandlesWithIndicators(
-      String symbol, List<String> indicators) async {
-    final List<YahooFinanceCandleData> prices =
-        await YahooFinanceService().getTickerData(symbol);
+    String symbol,
+    List<String> indicators, {
+    bool useCache = true,
+  }) async {
+    final List<YahooFinanceCandleData> prices = await YahooFinanceService().getTickerData(
+      symbol,
+      useCache: useCache,
+    );
 
     CalculateIndicators.calculateIndicators(prices, indicators);
 
