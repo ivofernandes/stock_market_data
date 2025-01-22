@@ -13,7 +13,8 @@ void main() {
     final Map<String, List<YahooFinanceCandleData>> stockData = {};
 
     for (final String ticker in sp8) {
-      final List<YahooFinanceCandleData> candles = await StockMarketDataService().getCandlesWithIndicators(
+      final List<YahooFinanceCandleData> candles =
+          await StockMarketDataService().getCandlesWithIndicators(
         ticker,
         indicators,
         useCache: false,
@@ -21,6 +22,7 @@ void main() {
       stockData[ticker] = candles;
     }
 
-    List<List<String>> ranked = RankAssets.rankByIndicator(stockData, indicators);
+    List<List<String>> ranked =
+        RankAssets.rankByIndicator(stockData, indicators);
   });
 }

@@ -42,3 +42,6 @@ Added more futures
 
 ## 0.1.2
 Workaround in CAGR calculation when the open is 0
+
+## 0.1.3
+Added european ETFs

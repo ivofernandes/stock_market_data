@@ -4,7 +4,8 @@ import 'package:stock_market_data/stock_market_data.dart';
 
 abstract class RankAssets {
   static List<List<String>> rankByIndicator(
-      Map<String, List<YahooFinanceCandleData>> stockData, List<String> indicators) {
+      Map<String, List<YahooFinanceCandleData>> stockData,
+      List<String> indicators) {
     // This will hold the final list of lists for rankings per indicator
     List<List<String>> rankings = [];
 
@@ -31,7 +32,8 @@ abstract class RankAssets {
 
       // Sort the stocks by the indicator value in descending order
       List<String> sortedStockIds = latestValues.keys.toList();
-      sortedStockIds.sort((a, b) => latestValues[b]!.compareTo(latestValues[a]!));
+      sortedStockIds
+          .sort((a, b) => latestValues[b]!.compareTo(latestValues[a]!));
 
       // Add the sorted list of stock IDs to the rankings
       rankings.add(sortedStockIds);

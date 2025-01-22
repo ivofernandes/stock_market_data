@@ -9,14 +9,19 @@ class TickersList {
     '^NDX': 'Nasdaq 100', // Nasdaq-100 Index
     'IWM': 'Russell 2000', // Russell 2000 Index ETF
     'IWB': 'Russell 1000', // Russell 1000 Index ETF
-    'DIA': 'Dow Jones Industrial Average ETF', // Tracks the Dow Jones Industrial Average
+    'DIA':
+        'Dow Jones Industrial Average ETF', // Tracks the Dow Jones Industrial Average
     'QQQ': 'Invesco QQQ', // ETF tracking the Nasdaq-100 Index
-    'VTI': 'Vanguard Total Stock Market ETF', // Tracks the CRSP US Total Market Index
+    'VTI':
+        'Vanguard Total Stock Market ETF', // Tracks the CRSP US Total Market Index
     'VOO': 'Vanguard S&P 500 ETF', // Tracks the S&P 500 Index
-    'EFA': 'iShares MSCI EAFE ETF', // Tracks the MSCI EAFE Index (developed markets excluding the U.S. and Canada)
-    'EEM': 'iShares MSCI Emerging Markets ETF', // Tracks the MSCI Emerging Markets Index
+    'EFA':
+        'iShares MSCI EAFE ETF', // Tracks the MSCI EAFE Index (developed markets excluding the U.S. and Canada)
+    'EEM':
+        'iShares MSCI Emerging Markets ETF', // Tracks the MSCI Emerging Markets Index
     'EWJ': 'iShares MSCI Japan ETF', // Tracks Japanese market
-    'FXI': 'iShares China Large-Cap ETF', // Tracks the FTSE China 50 Index (large-cap Chinese stocks)
+    'FXI':
+        'iShares China Large-Cap ETF', // Tracks the FTSE China 50 Index (large-cap Chinese stocks)
     'SPY': 'S&P 500 ETF',
     'QQQ': 'Nasdaq ETF',
   };
@@ -25,13 +30,15 @@ class TickersList {
   /// added this list here with equivalent european ETFs,
   /// they tend to be inferior in the way that have less track record of trading years
   static Map<String, String> europeanEtfs = {
-    'VUSA.AS': 'S&P 500 ETF',
-    'EXXT.DE': 'Nasdaq 100 ETF',
-    'QDVA.DE': 'Momentum ETF',
-    'SXLE.AS': 'Energy ETF',
-    'SXLU.AS': 'Utilities ETF',
-    'SXLV.AS': 'HealthCare ETF',
-    'SXLK.AS': 'Technology ETF',
+    'SXRV.DE': 'iShares Nasdaq 100',
+    'ANAU.SW': 'AXA IM NASDAQ 100',
+    'VUSA.AS': 'Vanguard S&P 500',
+    'EXXT.DE': 'iShares Nasdaq 100',
+    'QDVA.DE': 'iShares Momentum',
+    'SXLE.AS': 'Energy',
+    'SXLU.AS': 'Utilities',
+    'SXLV.AS': 'HealthCare',
+    'SXLK.AS': 'Technology',
   };
 
   /// Main bonds
@@ -40,10 +47,14 @@ class TickersList {
     '^FVX': 'Treasury Yield 5 Years ',
     '^TNX': 'Treasury Yield 10 Years ',
     '^TYX': 'Treasury Yield 30 Years',
-    'AGG': 'iShares Core U.S. Aggregate Bond ETF', // Tracks an index of US investment-grade bonds
-    'BND': 'Vanguard Total Bond Market ETF', // Broad, diverse portfolio of US bonds
-    'TLT': 'iShares 20+ Year Treasury Bond ETF', // Tracks long-term U.S. Treasury bonds
-    'LQD': 'iShares iBoxx Investment Grade Corporate Bond ETF', // Corporate bonds
+    'AGG':
+        'iShares Core U.S. Aggregate Bond ETF', // Tracks an index of US investment-grade bonds
+    'BND':
+        'Vanguard Total Bond Market ETF', // Broad, diverse portfolio of US bonds
+    'TLT':
+        'iShares 20+ Year Treasury Bond ETF', // Tracks long-term U.S. Treasury bonds
+    'LQD':
+        'iShares iBoxx Investment Grade Corporate Bond ETF', // Corporate bonds
     'JNK': 'SPDR Bloomberg High Yield Bond ETF', // High-yield, high-risk bonds
   };
 

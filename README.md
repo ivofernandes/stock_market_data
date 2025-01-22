@@ -1,7 +1,7 @@
 [![pub package](https://img.shields.io/pub/v/stock_market_data.svg?label=stock_market_data&color=blue)](https://pub.dev/packages/stock_market_data)
-[![popularity](https://img.shields.io/pub/popularity/stock_market_data?logo=dart)](https://pub.dev/packages/stock_market_data/score)
+[![downloads](https://img.shields.io/pub/downloads/stock_market_data?logo=dart)](https://pub.dev/packages/stock_market_data/score)
 [![likes](https://img.shields.io/pub/likes/stock_market_data?logo=dart)](https://pub.dev/packages/stock_market_data/score)
-[![pub points](https://img.shields.io/pub/points/sentry?logo=dart)](https://pub.dev/packages/stock_market_data/score)
+[![pub points](https://img.shields.io/pub/points/stock_market_data?logo=dart)](https://pub.dev/packages/stock_market_data/score)
 
 # stock_market_data
 Package to get base indicators from the stock and base stats like buy and hold CAGR and total drawdown.
