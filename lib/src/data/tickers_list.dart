@@ -23,7 +23,6 @@ class TickersList {
     'FXI':
         'iShares China Large-Cap ETF', // Tracks the FTSE China 50 Index (large-cap Chinese stocks)
     'SPY': 'S&P 500 ETF',
-    'QQQ': 'Nasdaq ETF',
   };
 
   /// As we in europe are very blocked by regulators to use the US main ETFs,
